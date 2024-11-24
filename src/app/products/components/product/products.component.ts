@@ -9,4 +9,21 @@ import { Component } from '@angular/core';
 })
 export class ProductsComponent {
 
+  products = [
+    {
+      id: 1,
+      name: 'Camisa',
+      price: 2000
+    },
+    {
+      id: 2,
+      name: 'Jeans',
+      price: 2200
+    },
+    {
+      id: 3,
+      name: 'Zapatillas',
+      price: 2500
+    }
+  ]
 }
