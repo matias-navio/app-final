@@ -9,4 +9,7 @@ import { Component } from '@angular/core';
 })
 export class UserComponent {
 
+  username = "Matías Navío";
+  isLoggedIn = true;
+
 }
