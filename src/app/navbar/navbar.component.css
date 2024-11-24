@@ -5,7 +5,11 @@ header{
     display: flex;
     justify-content: center;
     background-color: rgb(29, 29, 29);
-    box-shadow: 0px 5px 20px rgba(102, 102, 102, 0.5);
+    box-shadow: 0px 5px 20px rgba(78, 78, 78, 0.5);
+}
+
+a{
+    text-decoration: none !important;
 }
 
 .nav{
@@ -22,30 +26,30 @@ header{
 .lista-nav{
     display: flex;
     justify-content: space-around;
-    background-color: rgb(87, 149, 207);
+    background-color: rgb(161, 137, 104);
     padding: 7px;
     border-radius: 40px;
 }
 
-.lista-nav a{
-    text-decoration: none;
-    font-weight: 700;
-    color: white;
-}
-
-.lista-nav a :hover{
-    background-color: rgb(53, 102, 148);
-    border-radius: 40px;
-    transition: .3s linear all;
-}
-
-.lista-nav a li{
+.lista-nav li{
     list-style: none;
     padding: 5px 10px;
 }
 
+.lista-nav li a{
+    font-weight: 700;
+    color: white;
+    border-radius: 40px;
+    padding: 5px 10px;
+}
+
+.lista-nav li a:hover{
+    background-color: rgb(129, 111, 83);
+    border-radius: 40px;
+    transition: .3s linear all;
+}
+
 .carrito{
-    background-color: rgb(87, 149, 207);
     text-align: center;
     display: flex;
     align-items: center;
@@ -55,7 +59,7 @@ header{
 }
 
 .carrito :hover{
-    background-color: rgb(53, 102, 148);
+    background-color: rgb(129, 111, 83);
     transition: .3s linear all;
 }
 
@@ -63,8 +67,8 @@ header{
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 80px;
+    width: 70px;
     height: 40px;
     border-radius: 40px;
-    background-color: rgb(87, 149, 207);
+    background-color: rgb(161, 137, 104);
 }

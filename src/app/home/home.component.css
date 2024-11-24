@@ -1,0 +1,39 @@
+.home {
+    position: relative;
+    width: 100%; 
+    height: 87.8vh; 
+    background-image: url('https://img.freepik.com/foto-gratis/tienda-ropa-borrosa-centro-comercial_1258-5.jpg?t=st=1732469788~exp=1732473388~hmac=e026e05d30d2d5c2c878c771022494faa31bae337ee93a16d4830b359674f01b&w=740'); /* Imagen de fondo */
+    background-size: cover; 
+    background-position: center; 
+    background-repeat: no-repeat; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+  }
+
+  .overlay {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+    color: white;
+  }
+
+  h1{
+    margin-left: 10rem;
+    max-width: 30%;
+    font-size: 54px;
+  }
+
+  a{
+    margin-left: 10rem;
+    text-decoration: none;
+    color: white;
+    background-color: rgb(161, 137, 104);
+    width: 7rem;
+    padding: 5px 15px;
+    border-radius: 40px;
+  }
