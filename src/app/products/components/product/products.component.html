@@ -1,6 +1,21 @@
-@for (product of products; track product.id) {
+@if (products.length == 0) {
+    <p class="mensaje-error">No hay productos registrados</p>
+}@else {
 
-    <p>{{ product.id }}</p>
-    <p>{{ product.name }}</p>
-    <p>{{ product.price }}</p>
+    <div class="tabla">
+        <div class="cabecera-tabla">
+            <p>Id</p>
+            <p>Marca</p>
+            <p>Precio</p>
+            <p>Tipo</p>
+        </div>
+        @for (product of products; track product.id) {
+            <div class="cuerpo-tablas">
+                <p>{{ product.id }}</p>
+                <p>{{ product.marca }}</p>
+                <p>{{ product.precio }}</p>
+                <p>{{ product.tipo }}</p>
+            </div>
+        }
+    </div>
 }
