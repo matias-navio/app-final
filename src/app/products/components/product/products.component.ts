@@ -1,23 +1,24 @@
 import { Component } from '@angular/core';
 import { Product } from '../../model/product';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { ProductService } from '../../../services/product.service';
 
 @Component({
   selector: 'app-products',
   standalone: true,
-  imports: [],
+  imports: [FormsModule],
   templateUrl: './products.component.html',
   styleUrl: './products.component.css'
 })
 export class ProductsComponent {
 
   selectedProduct: Product | null = null;
-  productForm!: FormGroup;
+  productForm! : FormGroup;
   products: Product[] = [];
   private productSubscripcion : Subscription | undefined;
   errorMessage: string = 'No hay productos disponibles.';
+  isEditing: boolean = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -53,5 +54,35 @@ export class ProductsComponent {
         this.errorMessage = 'Error al obtener los productos: ' + err.message;
       }
     });
+  }
+
+  editProduct(product: Product): void {
+    this.selectedProduct = { ...product }; // Crear una copia para evitar cambios en tiempo real
+    this.isEditing = true;
+  }
+
+  saveProduct(): void {
+    if (this.selectedProduct) {
+      this.productService
+        .editarProducto(this.selectedProduct.id, this.selectedProduct)
+        .subscribe(
+          (updatedProduct) => {
+            // Actualizar la lista de productos localmente
+            const index = this.products.findIndex((p) => p.id === updatedProduct.id);
+            if (index !== -1) {
+              this.products[index] = updatedProduct;
+            }
+            this.cancelEditing();
+          },
+          (error) => {
+            console.error('Error al actualizar el producto:', error);
+          }
+        );
+    }
+  }
+
+  cancelEditing(): void {
+    this.selectedProduct = null;
+    this.isEditing = false;
   }
 }

@@ -4,8 +4,6 @@ header{
     padding: 0;
     display: flex;
     justify-content: center;
-    background-color: rgb(29, 29, 29);
-    box-shadow: 0px 5px 20px rgba(78, 78, 78, 0.5);
 }
 
 a{
@@ -29,6 +27,7 @@ a{
     background-color: rgb(161, 137, 104);
     padding: 7px;
     border-radius: 40px;
+    box-shadow: 0 0 30px 5px rgba(161, 137, 104, 0.483);
 }
 
 .lista-nav li{
@@ -71,4 +70,5 @@ a{
     height: 40px;
     border-radius: 40px;
     background-color: rgb(161, 137, 104);
+    box-shadow: 0 0 30px 5px rgba(161, 137, 104, 0.483);
 }
