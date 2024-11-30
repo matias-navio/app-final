@@ -1,5 +1,7 @@
 @if (products.length == 0) {
-  <h3>No hay productos registrados!</h3>
+
+  <h3 class="sin-productos">No hay productos registrados!</h3>
+  
 }@else {
   <div class="tabla">
     <div class="cabecera-tabla">
@@ -27,39 +29,69 @@
 
 @if (isEditing) {
 
-  <h3>Editar Producto</h3>
-  <form (ngSubmit)="saveProduct()">
-    <div>
-      <label for="marca">Marca:</label>
+  <h3>Editar</h3>
+  <form class="form" (ngSubmit)="onSubmit()" #productForm="ngForm" novalidate>
+
+    <div class="campos-form">
+      <label for="marca">Marca</label>
       <input
         id="marca"
         [(ngModel)]="selectedProduct!.marca"
         name="marca"
         required
+        [ngClass]="{ 'invalid-input': !marca.invalid && marca.touched }"
+        #marca="ngModel"
       />
+      
+      @if (marca.invalid && marca.touched) {
+        <div class="error-message">
+          Este campo es obligatorio.
+        </div>
+      }
     </div>
-    <div>
-      <label for="precio">Precio:</label>
+
+    <div class="campos-form">
+      <label for="precio">Precio</label>
       <input
         id="precio"
         type="number"
         [(ngModel)]="selectedProduct!.precio"
         name="precio"
         required
+        [ngClass]="{ 'invalid-input': !precio.invalid && precio.touched }"
+        #precio="ngModel"
       />
+
+      @if (precio.invalid && precio.touched) {
+        <div class="error-message">
+          Este campo es obligatorio.
+        </div>
+      }
     </div>
-    <div>
-      <label for="tipo">Tipo:</label>
+
+    <div class="campos-form">
+      <label for="tipo">Tipo</label>
       <input
         id="tipo"
         [(ngModel)]="selectedProduct!.tipo"
         name="tipo"
         required
+        [ngClass]="{ 'invalid-input': !tipo.invalid && tipo.touched }"
+        #tipo="ngModel"
       />
+
+      @if (tipo.invalid && tipo.touched) {
+        <div class="error-message">
+          Este campo es obligatorio.
+        </div>
+      }
     </div>
-    <div>
-      <button type="submit">Guardar</button>
-      <button type="button" (click)="cancelEditing()">Cancelar</button>
+
+    <div class="btns-form">
+      <button [disabled]="productForm.invalid" class="btn-guardar" type="submit">Guardar</button>
+      <button class="btn-cancelar" type="button" (click)="cancelEditing()">Cancelar</button>
     </div>
+
   </form>
+
 }

@@ -3,11 +3,12 @@ import { Product } from '../../model/product';
 import { FormBuilder, FormGroup, FormsModule, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { ProductService } from '../../../services/product.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-products',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, CommonModule],
   templateUrl: './products.component.html',
   styleUrl: './products.component.css'
 })
@@ -17,7 +18,6 @@ export class ProductsComponent {
   productForm! : FormGroup;
   products: Product[] = [];
   private productSubscripcion : Subscription | undefined;
-  errorMessage: string = 'No hay productos disponibles.';
   isEditing: boolean = false;
 
   constructor(
@@ -48,20 +48,16 @@ export class ProductsComponent {
       next: (data) => {
         this.products = data; // Si hay datos, se llenan los productos.
       },
-      error: (err) => {
-        console.error(err);
-        // Mensaje de error en caso de fallo en la API.
-        this.errorMessage = 'Error al obtener los productos: ' + err.message;
-      }
     });
   }
 
   editProduct(product: Product): void {
-    this.selectedProduct = { ...product }; // Crear una copia para evitar cambios en tiempo real
+    this.selectedProduct = { ...product };
     this.isEditing = true;
   }
 
-  saveProduct(): void {
+  onSubmit(): void {
+
     if (this.selectedProduct) {
       this.productService
         .editarProducto(this.selectedProduct.id, this.selectedProduct)
@@ -72,11 +68,9 @@ export class ProductsComponent {
             if (index !== -1) {
               this.products[index] = updatedProduct;
             }
+
             this.cancelEditing();
           },
-          (error) => {
-            console.error('Error al actualizar el producto:', error);
-          }
         );
     }
   }

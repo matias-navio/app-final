@@ -15,12 +15,19 @@ export class ProductService {
 
   getProducts(): Observable<Product[]>{
 
-    const url = `${this.url}/todos`; // Construcción de la URL completa
+    const url = `${this.url}/todos`;
     return this._http.get<Product[]>(url);
   }
 
   editarProducto(prductId: number, product: Product): Observable<Product>{
-    
-    return this._http.put<Product>(`${this.url}/${prductId}`, product);
+
+    const url = `${this.url}/modificar`;
+    return this._http.put<Product>(`${url}/${prductId}`, product);
+  }
+
+  crearProducto(producto: Product): Observable<Product> {
+
+    const url = `${this.url}/crear`;
+    return this._http.post<Product>(`${url}`, producto);
   }
 }
