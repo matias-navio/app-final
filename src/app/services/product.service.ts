@@ -30,4 +30,9 @@ export class ProductService {
     const url = `${this.url}/crear`;
     return this._http.post<Product>(`${url}`, producto);
   }
+
+  eliminarProducto(id: number): Observable<void> {
+
+    return this._http.delete<void>(`${this.url}/eliminar/${id}`);
+  }
 }

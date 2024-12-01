@@ -19,18 +19,25 @@
         <p> {{ product.precio }} </p>
         <p> {{ product.tipo }} </p>
         <div class="btns-operaciones">
-          <button class="btn-editar" (click)="editProduct(product)">Editar</button>
-          <button class="btn-eliminar">Eliminar</button>
+          <button class="btn-editar" (click)="openForm(product)">Editar</button>
+          <button class="btn-eliminar" (click)="eliminarProducto(product.id)">Eliminar</button>
         </div>
       </div>
     }
   </div>
+
+  <div class="crear">
+    <button class="btn-crear" (click)="openForm()">Crear Producto</button>
+  </div>
+  
 }
 
-@if (isEditing) {
+<!-- form para editar un producto -->
+
+@if (selectedProduct) {
 
   <h3>Editar</h3>
-  <form class="form" (ngSubmit)="onSubmit()" #productForm="ngForm" novalidate>
+  <form class="form" (ngSubmit)="saveProduct()" #productForm="ngForm" novalidate>
 
     <div class="campos-form">
       <label for="marca">Marca</label>
@@ -41,6 +48,7 @@
         required
         [ngClass]="{ 'invalid-input': !marca.invalid && marca.touched }"
         #marca="ngModel"
+        placeholder="Adidas"
       />
       
       @if (marca.invalid && marca.touched) {
@@ -78,6 +86,7 @@
         required
         [ngClass]="{ 'invalid-input': !tipo.invalid && tipo.touched }"
         #tipo="ngModel"
+        placeholder="Pantalon"
       />
 
       @if (tipo.invalid && tipo.touched) {

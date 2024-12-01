@@ -59,11 +59,39 @@
     border: none;
 }
 
+.btn-editar:hover {
+    background-color: rgba(172, 105, 231, 0.797);
+    transition: .2s linear all;
+}
+
 .btn-eliminar{
-    background-color: rgb(218, 79, 79);
+    background-color: rgb(201, 104, 104);
     padding: 5px 7px;
     border-radius: 3px;
     border: none;
+}
+
+.btn-eliminar:hover {
+    background-color: rgba(174, 71, 71, 0.812);
+    transition: .2s linear all;
+}
+
+.crear{
+    display: flex;
+    justify-content: center;
+}
+
+.btn-crear{
+    padding: 10px 20px;
+    background-color: rgb(58, 173, 83);
+    border: none;
+    border-radius: 5px;
+    font-size: 17px;
+}
+
+.btn-crear:hover {
+    background-color: rgba(58, 173, 83, 0.835);
+    transition: .2s linear all;
 }
 
 h3{

@@ -14,11 +14,12 @@ import { CommonModule } from '@angular/common';
 })
 export class ProductsComponent {
 
-  selectedProduct: Product | null = null;
+  selectedProduct: Product | null = null; // producto que se selecciona de la tabla
   productForm! : FormGroup;
-  products: Product[] = [];
-  private productSubscripcion : Subscription | undefined;
-  isEditing: boolean = false;
+  products: Product[] = []; // para poblar la lista de productos
+  private productSubscripcion : Subscription | undefined; 
+  newProduct: Product = { id: 0, marca: '', precio: 0, tipo: '' }; // estructura para crear un nuevo productos
+  isEditMode: boolean = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -51,32 +52,62 @@ export class ProductsComponent {
     });
   }
 
-  editProduct(product: Product): void {
-    this.selectedProduct = { ...product };
-    this.isEditing = true;
+  openForm(product?: Product): void {
+    if (product) {
+      this.selectedProduct = { ...product }; // Clonar producto para evitar modificar el original
+      this.isEditMode = true; // Modo edición
+    } else {
+      this.selectedProduct = { id: 0, marca: '', precio: 0, tipo: '' }; // Valores por defecto
+      this.isEditMode = false; // Modo creación
+    }
   }
 
-  onSubmit(): void {
+  saveProduct(): void {
+    if (!this.selectedProduct) return;
 
-    if (this.selectedProduct) {
-      this.productService
-        .editarProducto(this.selectedProduct.id, this.selectedProduct)
-        .subscribe(
-          (updatedProduct) => {
-            // Actualizar la lista de productos localmente
-            const index = this.products.findIndex((p) => p.id === updatedProduct.id);
-            if (index !== -1) {
-              this.products[index] = updatedProduct;
-            }
-
-            this.cancelEditing();
-          },
-        );
+    if (this.isEditMode) {
+      // Actualizar producto
+      this.productService.editarProducto(this.selectedProduct.id, this.selectedProduct).subscribe({
+        next: (updatedProduct) => {
+          // verifica que el id seleccionado es igual al del producto de la tabla
+          const index = this.products.findIndex((p) => p.id === updatedProduct.id);
+          if (index !== -1) {
+            this.products[index] = updatedProduct;
+          }
+          // oculta el formulario una vez actualizado el producto
+          this.selectedProduct = null;
+          this.isEditMode = false;
+        },
+      });
+    } else {
+      // Crear nuevo producto
+      this.productService.crearProducto(this.selectedProduct).subscribe({
+        next: (createdProduct) => {
+          this.products.push(createdProduct);
+          this.selectedProduct = null;
+        },
+      });
     }
   }
 
   cancelEditing(): void {
-    this.selectedProduct = null;
-    this.isEditing = false;
+    this.selectedProduct = null; // Cierra el formulario
+    this.isEditMode = false;
+  }
+
+  eliminarProducto(id: number): void {
+    if (confirm('¿Estás seguro de que deseas eliminar este producto?')) {
+      this.productService.eliminarProducto(id).subscribe({
+        next: () => {
+          // Eliminar el producto de la lista local
+          this.products = this.products.filter((product) => product.id !== id);
+          console.log('Producto eliminado con éxito');
+        },
+        error: (err) => {
+          console.error('Error al eliminar el producto:', err);
+          alert('Hubo un error al intentar eliminar el producto.');
+        },
+      });
+    }
   }
 }
