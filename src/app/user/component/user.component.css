@@ -1,0 +1,154 @@
+.tabla{
+    max-width: 55%;
+    margin: 6rem auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.cabecera-tabla{
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+    background-color: rgb(73, 106, 113);
+    border-radius: 10px 10px 0 0;
+}
+
+.cuerpo-tabla{
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+    background-color: rgb(98, 143, 153);
+    border-bottom: 1px solid rgb(219, 219, 219);
+}
+
+.cuerpo-tabla:last-child {
+    border: none;
+    border-radius: 0 0 10px 10px;
+}
+
+.cuerpo-tabla:hover {
+    background-color: rgb(86, 131, 141);
+    transition: .2s linear all;
+}
+
+.cabecera-tabla p,
+.cuerpo-tabla p {
+  flex: 1; 
+  text-align: center;
+  margin: 0;
+  padding: 10px 10px; 
+}
+
+.btns-operaciones{
+    display: flex;
+    align-items: center;
+}
+
+.btns-operaciones button{
+    margin: 0 15px;
+}
+
+.btn-editar{
+    background-color: rgb(149, 94, 197);
+    padding: 5px 7px;
+    border-radius: 3px;
+    border: none;
+}
+
+.btn-editar:hover {
+    background-color: rgba(172, 105, 231, 0.797);
+    transition: .2s linear all;
+}
+
+.btn-eliminar{
+    background-color: rgb(201, 104, 104);
+    padding: 5px 7px;
+    border-radius: 3px;
+    border: none;
+}
+
+.btn-eliminar:hover {
+    background-color: rgba(174, 71, 71, 0.812);
+    transition: .2s linear all;
+}
+
+.crear{
+    display: flex;
+    justify-content: center;
+}
+
+.btn-crear{
+    padding: 10px 20px;
+    background-color: rgb(58, 173, 83);
+    border: none;
+    border-radius: 5px;
+    font-size: 17px;
+}
+
+.btn-crear:hover {
+    background-color: rgba(58, 173, 83, 0.835);
+    transition: .2s linear all;
+}
+
+h3{
+    text-align: center;
+    font-size: 26px;
+}
+
+.form{
+    max-width: 30%;
+    margin: 0 auto;
+    border-radius: 5px;
+    box-shadow: 0 0 10px 5px rgba(104, 104, 104, 0.237);
+    margin-bottom: 100px;
+    padding: 50px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgba(104, 104, 104, 0.237);
+}
+
+.campos-form{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+    width: 70%;
+}
+
+.campos-form label{
+    font-size: 13px;
+    margin-bottom: 3px;
+}
+
+.campos-form input{
+    border: none;
+    padding: 8px 10px;
+    background-color: rgba(73, 73, 73, 0.237);
+    border-bottom: 2px solid rgba(255, 255, 255, 0.234);
+}
+
+.btns-form{
+    margin-top: 30px;
+    width: 70%;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.btn-guardar{
+    padding: 5px 10px;
+    background-color: rgb(58, 173, 83);
+    border: none;
+    border-radius: 5px;
+}
+
+.btn-cancelar{
+    padding: 5px 10px;
+    background-color: rgb(111, 111, 111);
+    border: none;
+    border-radius: 5px;
+}
+
+.error-message{
+    color: rgb(245, 75, 75);
+    font-size: 12px;
+}

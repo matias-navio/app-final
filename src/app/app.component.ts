@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { UserComponent } from './user/user.component';
+import { UserComponent } from './user/component/user.component';
 import { ProductsComponent } from './products/components/product/products.component';
 import { NavbarComponent } from './navbar/navbar.component';
 

@@ -103,10 +103,6 @@ export class ProductsComponent {
           this.products = this.products.filter((product) => product.id !== id);
           console.log('Producto eliminado con éxito');
         },
-        error: (err) => {
-          console.error('Error al eliminar el producto:', err);
-          alert('Hubo un error al intentar eliminar el producto.');
-        },
       });
     }
   }

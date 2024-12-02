@@ -1,0 +1,105 @@
+@if (users.length == 0) {
+    
+    <h3>No hay Empleados registrados!</h3>
+
+}@else {
+
+    <div class="tabla">
+        <div class="cabecera-tabla">
+          <p>ID</p>
+          <p>NOMBRE</p>
+          <p>APELLIDO</p>
+          <p>EMAIL</p>
+          <p>OPERACIONES</p>
+        </div>
+    
+        @for (user of users; track user.id) {
+          <div class="cuerpo-tabla">
+            <p> {{ user.id }} </p>
+            <p> {{ user.nombre }} </p>
+            <p> {{ user.apellido }} </p>
+            <p> {{ user.email }} </p>
+            <div class="btns-operaciones">
+              <button class="btn-editar" (click)="openForm(user)">Editar</button>
+              <button class="btn-eliminar" (click)="eliminarUser(user.id)">Eliminar</button>
+            </div>
+          </div>
+        }
+      </div>
+    
+      <div class="crear">
+        <button class="btn-crear" (click)="openForm()">Crear Empleado</button>
+      </div>
+}
+
+@if (selectedUser) {
+
+    <h3>Editar</h3>
+    <form class="form" (ngSubmit)="saveUser()" #userForm="ngForm" novalidate>
+  
+      <div class="campos-form">
+        <label for="nombre">Nombre</label>
+        <input
+          id="nombre"
+          [(ngModel)]="selectedUser!.nombre"
+          name="nombre"
+          required
+          [ngClass]="{ 'invalid-input': !nombre.invalid && nombre.touched }"
+          #nombre="ngModel"
+          placeholder="Juan"
+        />
+        
+        @if (nombre.invalid && nombre.touched) {
+          <div class="error-message">
+            Este campo es obligatorio.
+          </div>
+        }
+      </div>
+  
+      <div class="campos-form">
+        <label for="precio">Apellido</label>
+        <input
+          id="apellido"
+          type="apellido"
+          [(ngModel)]="selectedUser!.apellido"
+          name="precio"
+          required
+          [ngClass]="{ 'invalid-input': !apellido.invalid && apellido.touched }"
+          #apellido="ngModel"
+          placeholder="Perez"
+        />
+  
+        @if (apellido.invalid && apellido.touched) {
+          <div class="error-message">
+            Este campo es obligatorio.
+          </div>
+        }
+      </div>
+  
+      <div class="campos-form">
+        <label for="tipo">Email</label>
+        <input
+          id="email"
+          [(ngModel)]="selectedUser!.email"
+          name="email"
+          required
+          [ngClass]="{ 'invalid-input': !email.invalid && email.touched }"
+          #email="ngModel"
+          placeholder="juan@gmail.com"
+          type="email"
+        />
+  
+        @if (email.invalid && email.touched) {
+          <div class="error-message">
+            Este campo es obligatorio.
+          </div>
+        }
+      </div>
+  
+      <div class="btns-form">
+        <button [disabled]="userForm.invalid" class="btn-guardar" type="submit">Guardar</button>
+        <button class="btn-cancelar" type="button" (click)="cancelEditing()">Cancelar</button>
+      </div>
+  
+    </form>
+}  
